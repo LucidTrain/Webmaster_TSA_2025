@@ -48,7 +48,7 @@
         .navbar {
             position: fixed;
             top: 0;
-            width: 100%;
+            width: 95%;
             padding: 1.5rem 3rem;
             background: rgba(10, 31, 26, 0.95);
             backdrop-filter: blur(10px);
@@ -438,16 +438,204 @@
                 font-size: 1rem;
             }
         }
+
+
+        /* Footer Styles */
+        .footer-section {
+            position: relative;
+            padding: 4rem 0 0;
+            background: linear-gradient(to bottom, var(--dark-green), #061310);
+            margin-top: auto;
+        }
+
+        #particles-jsbtm {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer {
+            background: var(--medium-green);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+            .footer-column h3::after {
+                content: '';
+                position: absolute;
+                bottom: -8px;
+                left: 0;
+                width: 50px;
+                height: 2px;
+                background: var(--gold);
+            }
+
+        .footer-column p {
+            color: var(--cream);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+            .footer-links li {
+                margin-bottom: 0.8rem;
+            }
+
+            .footer-links a {
+                color: var(--cream);
+                text-decoration: none;
+                transition: all 0.3s ease;
+            }
+
+                .footer-links a:hover {
+                    color: var(--gold);
+                    padding-left: 5px;
+                }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            color: var(--gold);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+            .social-icon:hover {
+                color: var(--cream);
+                transform: translateY(-3px);
+            }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .footer-text {
+            color: var(--cream);
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem;
+            background: rgba(250, 247, 242, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 5px;
+            color: var(--cream);
+            font-family: 'Cormorant', serif;
+        }
+
+        .newsletter-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--gold);
+            border: none;
+            border-radius: 5px;
+            color: var(--dark-green);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+            .newsletter-btn:hover {
+                background: var(--cream);
+            }
+
+        /* Animations */
+        @keyframes shimmer {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsiveness */
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
+
 <body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-icon">VLD</div>
+            <div class="logo-text"><a href="index.html" style="text-decoration: none; color: var(--gold);">La Verdure Dorée</a></div>
+        </div>
+        <div class="nav-links">
+            <a href="newdishes.html" class="nav-link">Menu</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="#contact-reservation001" class="nav-link">Reservations</a>
+            <a href="Ref.html" class="nav-link">References</a>
+        </div>
+    </nav>
     <div id="particles-jsdish"></div>
     <section class="menu-section">
         <div class="menu-header">
             <h2 class="menu-title">Our Culinary Masterpieces</h2>
             <p class="menu-subtitle">A Symphony of Flavors Crafted with Passion</p>
         </div>
-        
+
         <div class="menu-categories">
             <button class="category-buttondish active" data-category="main">Main Courses</button>
             <button class="category-buttondish" data-category="sides">Starters & Sides</button>
@@ -457,9 +645,7 @@
 
 
         <!--    -->
-
         <!--    -->
-
         <!--    -->
         <div class="menu-items-container">
             <div class="menu-items active" id="main">
@@ -476,7 +662,58 @@
             </div>
         </div>
 
-        <a href="#" class="discover-button">Discover Our Full Menu</a>
+        <!-- <a href="#" class="discover-button">Discover Our Full Menu</a> -->
+
+    </section>
+
+    <div id="particles-jsbtm"></div>
+    <footer class="footer">
+        <div class="content-wrapper">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <p>La Verdure Dorée brings the finest French cuisine to Sleepy Hollow. Our commitment to excellence and sustainable ingredients creates an unforgettable dining experience.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Menu</a></li>
+                        <li><a href="#">Reservations</a></li>
+                        <li><a href="#">Private Events</a></li>
+                        <li><a href="#">Gift Cards</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Valley Street, Sleepy Hollow, NY</li>
+                        <li><i class="fas fa-phone"></i> (914) 555-0123</li>
+                        <li><i class="fas fa-envelope"></i> info@verduredoree.com</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter for special offers and updates.</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-text">&copy; 2025 La Verdure Dorée. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
     </section>
 
     <script>
@@ -531,120 +768,120 @@
         // Menu data
         const menuData = {
             main: [
-                { 
-                    name: 'Veggie Pizza', 
-                    price: '$18.99', 
+                {
+                    name: 'Veggie Pizza',
+                    price: '$18.99',
                     image: 'https://www.papajohns.com/vegetarian-pizza/img/vegetarian-hero.jpg',
                     description: 'A vibrant medley of fresh garden vegetables on our signature artisanal crust, finished with herb-infused olive oil.',
                     tags: ['Vegetarian', 'House Favorite']
                 },
-                { 
-                    name: 'Cheese Pizza', 
-                    price: '$16.99', 
+                {
+                    name: 'Cheese Pizza',
+                    price: '$16.99',
                     image: 'https://www.papajohns.com/pizza-pages/img/hero.jpg',
                     description: 'Our classic pizza featuring a perfect blend of five premium cheeses atop our secret recipe tomato sauce.',
                     tags: ['Vegetarian', 'Classic']
                 },
-                { 
-                    name: 'Burger & Fries Meal', 
-                    price: '$21.99', 
+                {
+                    name: 'Burger & Fries Meal',
+                    price: '$21.99',
                     image: 'https://www.sheknows.com/wp-content/uploads/2019/01/mcdonalds-bacon-items.jpg',
                     description: 'A juicy premium beef patty with all the fixings, served with golden crispy fries and our signature dipping sauce.',
                     tags: ['Popular', 'Comfort Food']
                 },
-                { 
-                    name: 'Gourmet Burger Platter', 
-                    price: '$24.99', 
+                {
+                    name: 'Gourmet Burger Platter',
+                    price: '$24.99',
                     image: 'https://www.seriouseats.com/thmb/d2DYiLy-rNKmxrW1gchCOZcGIWY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20210607-INNOUTBURGERS-JANJIGIAN-seriouseats-23-b2b8a505ff414272aab71590a8985b85.jpg',
                     description: 'Prime Angus beef with caramelized onions, aged cheddar, and truffle aioli, accompanied by gourmet sides.',
                     tags: ['Chef\'s Special', 'Premium']
                 },
-                { 
-                    name: 'Artisanal Sandwich', 
-                    price: '$19.99', 
+                {
+                    name: 'Artisanal Sandwich',
+                    price: '$19.99',
                     image: 'https://www.allrecipes.com/thmb/m8Q8v8TmfCqVAXuxYIwu-DooSjw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/ar-cold-sub-taste-test-main-2-4x3-9e302eec508149aea9b7853b28646c82.jpg',
                     description: 'Freshly baked sourdough filled with premium cold cuts, aged cheeses, and house-made condiments.',
                     tags: ['New', 'Seasonal']
                 }
             ],
             sides: [
-                { 
-                    name: 'Falafel Plate', 
-                    price: '$12.99', 
+                {
+                    name: 'Falafel Plate',
+                    price: '$12.99',
                     image: 'https://www.dimitrasdishes.com/wp-content/uploads/2021/03/WEB-WIDE-Side-Closeup-1024x683.jpg',
                     description: 'Crispy herb-infused chickpea fritters served with tahini sauce, fresh vegetables and warm pita bread.',
                     tags: ['Vegan', 'Gluten-Free Option']
                 },
-                { 
-                    name: 'Corn Soup', 
-                    price: '$9.99', 
+                {
+                    name: 'Corn Soup',
+                    price: '$9.99',
                     image: 'https://therecipecritic.com/wp-content/uploads/2018/10/IMG_5960.jpg',
                     description: 'Creamy sweet corn soup with a hint of truffle, garnished with chives and crème fraîche.',
                     tags: ['Vegetarian', 'Seasonal']
                 },
-                { 
-                    name: 'Cheese Bread', 
-                    price: '$8.99', 
+                {
+                    name: 'Cheese Bread',
+                    price: '$8.99',
                     image: 'https://therecipecritic.com/wp-content/uploads/2020/02/cheesy_garlic_bread.jpg',
                     description: 'Warm artisan bread topped with garlic butter and a blend of melted premium cheeses.',
                     tags: ['Vegetarian', 'Shareable']
                 },
-                { 
-                    name: 'Cheese Sticks', 
-                    price: '$10.99', 
+                {
+                    name: 'Cheese Sticks',
+                    price: '$10.99',
                     image: 'https://www.allrecipes.com/thmb/hubOWXvWGhHffS5-vKMU8-KEabI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/23596-fried-mozzarella-cheese-sticks-2x1-253-2599fbbad55d4608a7ea9a852d2f8ae5.jpg',
                     description: 'Hand-breaded mozzarella sticks, fried to golden perfection and served with marinara sauce.',
                     tags: ['Vegetarian', 'Popular']
                 }
             ],
             desserts: [
-                { 
-                    name: 'Tiramisu', 
-                    price: '$12.99', 
+                {
+                    name: 'Tiramisu',
+                    price: '$12.99',
                     image: 'https://static01.nyt.com/images/2017/04/05/dining/05COOKING-TIRAMISU1/05COOKING-TIRAMISU1-square640.jpg',
                     description: 'Layers of coffee-soaked ladyfingers and mascarpone cream, dusted with premium cocoa powder.',
-                    tags: ['Classic', 'Contains Alcohol']
+                    tags: ['Classic', 'Premium']
                 },
-                { 
-                    name: 'Chocolate Mousse', 
-                    price: '$11.99', 
+                {
+                    name: 'Chocolate Mousse',
+                    price: '$11.99',
                     image: 'https://www.thehungrybites.com/wp-content/uploads/2016/11/easy-chocolate-mousse-cake-featured.jpg',
                     description: 'Silky smooth dark chocolate mousse topped with fresh berries and edible gold leaf.',
                     tags: ['Signature Dessert', 'Rich']
                 },
-                { 
-                    name: 'Strawberry Cheesecake', 
-                    price: '$13.99', 
+                {
+                    name: 'Strawberry Cheesecake',
+                    price: '$13.99',
                     image: 'https://sugarspunrun.com/wp-content/uploads/2023/06/Strawberry-cheesecake-recipe-6-of-8.jpg',
                     description: 'Creamy New York style cheesecake with a graham cracker crust and fresh strawberry compote.',
                     tags: ['Seasonal', 'Popular']
                 }
             ],
             drinks: [
-                { 
-                    name: 'Custom Soda', 
-                    price: '$5.99', 
-                    image: 'https://media.istockphoto.com/id/1368679348/photo/glasses-of-soda.jpg',
+                {
+                    name: 'Custom Soda',
+                    price: '$5.99',
+                    image: 'https://pitaloca.deelzoo.com/wp-content/uploads/sites/1093/2022/09/Soda.jpg',
                     description: 'House-made soda with your choice of natural fruit syrups and fresh herbs, served over ice.',
                     tags: ['Customizable', 'Refillable']
                 },
-                { 
-                    name: 'Custom Boba', 
-                    price: '$6.99', 
+                {
+                    name: 'Custom Boba',
+                    price: '$6.99',
                     image: 'https://bubblepanda.com/cdn/shop/articles/bubble-tea-ingredients.jpg',
                     description: 'Handcrafted boba tea with premium loose leaf tea, your choice of milk, and tapioca pearls.',
                     tags: ['Customizable', 'Popular']
                 },
-                { 
-                    name: 'Custom Shake', 
-                    price: '$7.99', 
+                {
+                    name: 'Custom Shake',
+                    price: '$7.99',
                     image: 'https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FRecipes%2F2020-07-how-to-make-a-milkshake-at-home%2F2020-06-08_AT-K19388',
                     description: 'Creamy milkshake made with artisanal ice cream and your choice of mix-ins and toppings.',
                     tags: ['Customizable', 'Indulgent']
                 },
-                { 
-                    name: 'Mango Lassi', 
-                    price: '$6.99', 
+                {
+                    name: 'Mango Lassi',
+                    price: '$6.99',
                     image: 'https://www.indianhealthyrecipes.com/wp-content/uploads/2022/04/mango-lassi-recipe.jpg',
                     description: 'Refreshing blend of ripe Alphonso mangoes, creamy yogurt, and a hint of cardamom.',
                     tags: ['Signature Drink', 'Seasonal']
@@ -655,20 +892,20 @@
         // Function to create menu items
         function createMenuItem(item) {
             const tagElements = item.tags ? item.tags.map(tag => `<span class="item-tag">${tag}</span>`).join('') : '';
-            
+
             return `
-                <div class="menu-item">
-                    <img src="${item.image}" alt="${item.name}" class="item-image">
-                    <div class="item-content">
-                        <h3 class="item-name">${item.name}</h3>
-                        <p class="item-description">${item.description}</p>
-                        <div class="item-tags">
-                            ${tagElements}
+                        <div class="menu-item">
+                            <img src="${item.image}" alt="${item.name}" class="item-image">
+                            <div class="item-content">
+                                <h3 class="item-name">${item.name}</h3>
+                                <p class="item-description">${item.description}</p>
+                                <div class="item-tags">
+                                    ${tagElements}
+                                </div>
+                                <p class="item-price">${item.price}</p>
+                            </div>
                         </div>
-                        <p class="item-price">${item.price}</p>
-                    </div>
-                </div>
-            `;
+                    `;
         }
 
         // Initialize menu items

@@ -485,6 +485,181 @@
                 height: 300px;
             }
         }
+
+
+
+        /* Footer Styles */
+        .footer-section {
+            position: relative;
+            padding: 4rem 0 0;
+            background: linear-gradient(to bottom, var(--dark-green), #061310);
+            margin-top: auto;
+        }
+
+        #particles-jsbtm {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer {
+            background: var(--medium-green);
+            padding: 4rem 0 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+            .footer-column h3::after {
+                content: '';
+                position: absolute;
+                bottom: -8px;
+                left: 0;
+                width: 50px;
+                height: 2px;
+                background: var(--gold);
+            }
+
+        .footer-column p {
+            color: var(--cream);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+            .footer-links li {
+                margin-bottom: 0.8rem;
+            }
+
+            .footer-links a {
+                color: var(--cream);
+                text-decoration: none;
+                transition: all 0.3s ease;
+            }
+
+                .footer-links a:hover {
+                    color: var(--gold);
+                    padding-left: 5px;
+                }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            color: var(--gold);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+            .social-icon:hover {
+                color: var(--cream);
+                transform: translateY(-3px);
+            }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .footer-text {
+            color: var(--cream);
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem;
+            background: rgba(250, 247, 242, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 5px;
+            color: var(--cream);
+            font-family: 'Cormorant', serif;
+        }
+
+        .newsletter-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--gold);
+            border: none;
+            border-radius: 5px;
+            color: var(--dark-green);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+            .newsletter-btn:hover {
+                background: var(--cream);
+            }
+
+        /* Animations */
+        @keyframes shimmer {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Responsiveness */
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -492,7 +667,7 @@
     <nav class="navbar">
         <div class="logo">
             <div class="logo-icon">VLD</div>
-            <div class="logo-text">La Verdure Dorée</div>
+            <div class="logo-text"><a href="index.html" style="text-decoration: none; color: var(--gold);">La Verdure Dorée</a></div>
         </div>
         <div class="nav-links">
             <a href="newdishes.html" class="nav-link">Menu</a>
@@ -567,9 +742,11 @@
                 </div>
             </div>
 
-            <a href="#" class="cta-buttonabout show-on-scrollabout">Learn More</a>
         </div>
     </section>
+
+
+
 
     <script>
         // Particle.js configuration
