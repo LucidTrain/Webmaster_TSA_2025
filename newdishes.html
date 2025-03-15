@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Section - La Verdure Dorée</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        
+
+
+
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant:ital,wght@0,400;0,600;1,400&family=Great+Vibes&display=swap');
+
+        :root {
+            --dark-green: #0a1f1a;
+            --medium-green: #142b25;
+            --cream: #faf7f2;
+            --gold: #d4af37;
+            --light-gold: #e6d5b8;
+        }
+
+
+
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+
+        body {
+            font-family: 'Cormorant', serif;
+            background: var(--dark-green);
+            color: var(--cream);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            background: rgba(10, 31, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+            .navbar.scrolled {
+                padding: 0.8rem 3rem;
+                background: rgba(10, 31, 26, 0.98);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Great Vibes', cursive;
+            color: var(--gold);
+            font-size: 20px;
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .logo-icon::before {
+                content: '';
+                position: absolute;
+                top: -100%;
+                left: -100%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+                opacity: 0;
+                transition: opacity 0.8s ease;
+            }
+
+            .logo-icon:hover::before {
+                opacity: 0.3;
+                animation: shimmer 2s infinite;
+            }
+
+            .logo-icon:hover {
+                transform: rotate(360deg) scale(1.1);
+                background: var(--gold);
+                color: var(--dark-green);
+                box-shadow: 0 0 30px var(--gold);
+            }
+
+        .logo-text {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 2rem;
+            letter-spacing: 2px;
+            transition: all 0.5s ease;
+            position: relative;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+            .logo-text::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: var(--gold);
+                transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+        .logo:hover .logo-text::after {
+            width: 100%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--cream);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.4s ease;
+        }
+
+            .nav-link::before,
+            .nav-link::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 1px;
+                background: var(--gold);
+                transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .nav-link::before {
+                top: 0;
+                left: 0;
+            }
+
+            .nav-link::after {
+                bottom: 0;
+                right: 0;
+            }
+
+            .nav-link:hover {
+                color: var(--gold);
+                transform: translateY(-2px);
+            }
+
+                .nav-link:hover::before,
+                .nav-link:hover::after {
+                    width: 100%;
+                }
+
+
+        #particles-jsdish {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .menu-section {
+            position: relative;
+            padding: 8rem 2rem;
+            z-index: 2;
+        }
+
+        .menu-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .menu-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        .menu-subtitle {
+            font-family: 'Cormorant', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--cream);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.3s;
+        }
+
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .category-buttondish {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            padding: 1rem 2rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.6s;
+        }
+
+        .category-buttondish::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: var(--gold);
+            transition: transform 0.6s ease;
+            transform: translate(-50%, -50%) rotate(45deg) translateY(100%);
+            z-index: -1;
+        }
+
+        .category-buttondish:hover,
+        .category-buttondish.active {
+            color: var(--dark-green);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .category-buttondish:hover::before,
+        .category-buttondish.active::before {
+            transform: translate(-50%, -50%) rotate(45deg) translateY(0);
+        }
+
+        .menu-items-container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .menu-items {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .menu-items.active {
+            display: grid;
+            animation: fadeInUp 1s forwards;
+        }
+
+        .menu-item {
+            background: rgba(20, 43, 37, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            transform: translateY(0);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+            border-color: var(--gold);
+        }
+
+        .item-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .menu-item:hover .item-image {
+            transform: scale(1.1);
+        }
+
+        .item-content {
+            padding: 1.5rem;
+        }
+
+        .item-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .item-description {
+            font-family: 'Cormorant', serif;
+            font-size: 1.1rem;
+            color: var(--cream);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+
+        .item-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .item-tag {
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .item-price {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--cream);
+            margin-top: 0.8rem;
+            font-weight: 600;
+        }
+
+        .discover-button {
+            display: block;
+            width: fit-content;
+            margin: 4rem auto 0;
+            padding: 1.2rem 3rem;
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.9s;
+        }
+
+        .discover-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: var(--gold);
+            transition: transform 0.6s ease;
+            transform: translate(-50%, -50%) rotate(45deg) translateY(100%);
+            z-index: -1;
+        }
+
+        .discover-button:hover {
+            color: var(--dark-green);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 30px rgba(212, 175, 55, 0.4);
+        }
+
+        .discover-button:hover::before {
+            transform: translate(-50%, -50%) rotate(45deg) translateY(0);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-title {
+                font-size: 2.5rem;
+            }
+
+            .menu-subtitle {
+                font-size: 1.4rem;
+            }
+
+            .menu-categories {
+                gap: 1rem;
+            }
+
+            .category-buttondish {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-jsdish"></div>
+    <section class="menu-section">
+        <div class="menu-header">
+            <h2 class="menu-title">Our Culinary Masterpieces</h2>
+            <p class="menu-subtitle">A Symphony of Flavors Crafted with Passion</p>
+        </div>
+        
+        <div class="menu-categories">
+            <button class="category-buttondish active" data-category="main">Main Courses</button>
+            <button class="category-buttondish" data-category="sides">Starters & Sides</button>
+            <button class="category-buttondish" data-category="desserts">Desserts</button>
+            <button class="category-buttondish" data-category="drinks">Drinks</button>
+        </div>
+
+        <div class="menu-items-container">
+            <div class="menu-items active" id="main">
+                <!-- Main courses will be populated by JavaScript -->
+            </div>
+            <div class="menu-items" id="sides">
+                <!-- Sides will be populated by JavaScript -->
+            </div>
+            <div class="menu-items" id="desserts">
+                <!-- Desserts will be populated by JavaScript -->
+            </div>
+            <div class="menu-items" id="drinks">
+                <!-- Drinks will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <a href="#" class="discover-button">Discover Our Full Menu</a>
+    </section>
+
+    <script>
+        // Particles.js configuration
+        particlesJS('particles-jsdish', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#d4af37' },
+                shape: { type: 'circle' },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    animation: { enable: true, speed: 1, minimumValue: 0.1, sync: false }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    animation: { enable: true, speed: 2, minimumValue: 0.1, sync: false }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#d4af37',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    outModes: { default: 'out' },
+                    attract: { enable: false, rotateX: 600, rotateY: 1200 }
+                }
+            },
+            interactivity: {
+                detectsOn: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'repulse' },
+                    onclick: { enable: true, mode: 'push' },
+                    resize: true
+                },
+                modes: {
+                    repulse: { distance: 100, duration: 0.4 },
+                    push: { particles_nb: 4 }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Menu data
+        const menuData = {
+            main: [
+                { 
+                    name: 'Veggie Pizza', 
+                    price: '$18.99', 
+                    image: 'https://www.papajohns.com/vegetarian-pizza/img/vegetarian-hero.jpg',
+                    description: 'A vibrant medley of fresh garden vegetables on our signature artisanal crust, finished with herb-infused olive oil.',
+                    tags: ['Vegetarian', 'House Favorite']
+                },
+                { 
+                    name: 'Cheese Pizza', 
+                    price: '$16.99', 
+                    image: 'https://www.papajohns.com/pizza-pages/img/hero.jpg',
+                    description: 'Our classic pizza featuring a perfect blend of five premium cheeses atop our secret recipe tomato sauce.',
+                    tags: ['Vegetarian', 'Classic']
+                },
+                { 
+                    name: 'Burger & Fries Meal', 
+                    price: '$21.99', 
+                    image: 'https://www.sheknows.com/wp-content/uploads/2019/01/mcdonalds-bacon-items.jpg',
+                    description: 'A juicy premium beef patty with all the fixings, served with golden crispy fries and our signature dipping sauce.',
+                    tags: ['Popular', 'Comfort Food']
+                },
+                { 
+                    name: 'Gourmet Burger Platter', 
+                    price: '$24.99', 
+                    image: 'https://www.seriouseats.com/thmb/d2DYiLy-rNKmxrW1gchCOZcGIWY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20210607-INNOUTBURGERS-JANJIGIAN-seriouseats-23-b2b8a505ff414272aab71590a8985b85.jpg',
+                    description: 'Prime Angus beef with caramelized onions, aged cheddar, and truffle aioli, accompanied by gourmet sides.',
+                    tags: ['Chef\'s Special', 'Premium']
+                },
+                { 
+                    name: 'Artisanal Sandwich', 
+                    price: '$19.99', 
+                    image: 'https://www.allrecipes.com/thmb/m8Q8v8TmfCqVAXuxYIwu-DooSjw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/ar-cold-sub-taste-test-main-2-4x3-9e302eec508149aea9b7853b28646c82.jpg',
+                    description: 'Freshly baked sourdough filled with premium cold cuts, aged cheeses, and house-made condiments.',
+                    tags: ['New', 'Seasonal']
+                }
+            ],
+            sides: [
+                { 
+                    name: 'Falafel Plate', 
+                    price: '$12.99', 
+                    image: 'https://www.dimitrasdishes.com/wp-content/uploads/2021/03/WEB-WIDE-Side-Closeup-1024x683.jpg',
+                    description: 'Crispy herb-infused chickpea fritters served with tahini sauce, fresh vegetables and warm pita bread.',
+                    tags: ['Vegan', 'Gluten-Free Option']
+                },
+                { 
+                    name: 'Corn Soup', 
+                    price: '$9.99', 
+                    image: 'https://therecipecritic.com/wp-content/uploads/2018/10/IMG_5960.jpg',
+                    description: 'Creamy sweet corn soup with a hint of truffle, garnished with chives and crème fraîche.',
+                    tags: ['Vegetarian', 'Seasonal']
+                },
+                { 
+                    name: 'Cheese Bread', 
+                    price: '$8.99', 
+                    image: 'https://therecipecritic.com/wp-content/uploads/2020/02/cheesy_garlic_bread.jpg',
+                    description: 'Warm artisan bread topped with garlic butter and a blend of melted premium cheeses.',
+                    tags: ['Vegetarian', 'Shareable']
+                },
+                { 
+                    name: 'Cheese Sticks', 
+                    price: '$10.99', 
+                    image: 'https://www.allrecipes.com/thmb/hubOWXvWGhHffS5-vKMU8-KEabI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/23596-fried-mozzarella-cheese-sticks-2x1-253-2599fbbad55d4608a7ea9a852d2f8ae5.jpg',
+                    description: 'Hand-breaded mozzarella sticks, fried to golden perfection and served with marinara sauce.',
+                    tags: ['Vegetarian', 'Popular']
+                }
+            ],
+            desserts: [
+                { 
+                    name: 'Tiramisu', 
+                    price: '$12.99', 
+                    image: 'https://static01.nyt.com/images/2017/04/05/dining/05COOKING-TIRAMISU1/05COOKING-TIRAMISU1-square640.jpg',
+                    description: 'Layers of coffee-soaked ladyfingers and mascarpone cream, dusted with premium cocoa powder.',
+                    tags: ['Classic', 'Contains Alcohol']
+                },
+                { 
+                    name: 'Chocolate Mousse', 
+                    price: '$11.99', 
+                    image: 'https://www.thehungrybites.com/wp-content/uploads/2016/11/easy-chocolate-mousse-cake-featured.jpg',
+                    description: 'Silky smooth dark chocolate mousse topped with fresh berries and edible gold leaf.',
+                    tags: ['Signature Dessert', 'Rich']
+                },
+                { 
+                    name: 'Strawberry Cheesecake', 
+                    price: '$13.99', 
+                    image: 'https://sugarspunrun.com/wp-content/uploads/2023/06/Strawberry-cheesecake-recipe-6-of-8.jpg',
+                    description: 'Creamy New York style cheesecake with a graham cracker crust and fresh strawberry compote.',
+                    tags: ['Seasonal', 'Popular']
+                }
+            ],
+            drinks: [
+                { 
+                    name: 'Custom Soda', 
+                    price: '$5.99', 
+                    image: 'https://media.istockphoto.com/id/1368679348/photo/glasses-of-soda.jpg',
+                    description: 'House-made soda with your choice of natural fruit syrups and fresh herbs, served over ice.',
+                    tags: ['Customizable', 'Refillable']
+                },
+                { 
+                    name: 'Custom Boba', 
+                    price: '$6.99', 
+                    image: 'https://bubblepanda.com/cdn/shop/articles/bubble-tea-ingredients.jpg',
+                    description: 'Handcrafted boba tea with premium loose leaf tea, your choice of milk, and tapioca pearls.',
+                    tags: ['Customizable', 'Popular']
+                },
+                { 
+                    name: 'Custom Shake', 
+                    price: '$7.99', 
+                    image: 'https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FRecipes%2F2020-07-how-to-make-a-milkshake-at-home%2F2020-06-08_AT-K19388',
+                    description: 'Creamy milkshake made with artisanal ice cream and your choice of mix-ins and toppings.',
+                    tags: ['Customizable', 'Indulgent']
+                },
+                { 
+                    name: 'Mango Lassi', 
+                    price: '$6.99', 
+                    image: 'https://www.indianhealthyrecipes.com/wp-content/uploads/2022/04/mango-lassi-recipe.jpg',
+                    description: 'Refreshing blend of ripe Alphonso mangoes, creamy yogurt, and a hint of cardamom.',
+                    tags: ['Signature Drink', 'Seasonal']
+                }
+            ]
+        };
+
+        // Function to create menu items
+        function createMenuItem(item) {
+            const tagElements = item.tags ? item.tags.map(tag => `<span class="item-tag">${tag}</span>`).join('') : '';
+            
+            return `
+                <div class="menu-item">
+                    <img src="${item.image}" alt="${item.name}" class="item-image">
+                    <div class="item-content">
+                        <h3 class="item-name">${item.name}</h3>
+                        <p class="item-description">${item.description}</p>
+                        <div class="item-tags">
+                            ${tagElements}
+                        </div>
+                        <p class="item-price">${item.price}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize menu items
+        function initializeMenuItems() {
+            Object.keys(menuData).forEach(category => {
+                const container = document.getElementById(category);
+                container.innerHTML = menuData[category].map(item => createMenuItem(item)).join('');
+            });
+        }
+
+        // Category switching logic
+        const categoryButtons = document.querySelectorAll('.category-buttondish');
+        const menuItemsContainers = document.querySelectorAll('.menu-items');
+
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and containers
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                menuItemsContainers.forEach(container => container.classList.remove('active'));
+
+                // Add active class to clicked button and corresponding container
+                button.classList.add('active');
+                const category = button.dataset.category;
+                document.getElementById(category).classList.add('active');
+
+                // Trigger animation for newly visible items
+                const items = document.getElementById(category).children;
+                Array.from(items).forEach((item, index) => {
+                    item.style.animation = `fadeInUp 0.5s forwards ${index * 0.1}s`;
+                });
+            });
+        });
+
+        // Intersection Observer for animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        // Observe all menu items
+        document.querySelectorAll('.menu-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Initialize menu on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeMenuItems();
+
+            // Add hover effect for menu items
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    item.style.transform = 'translateY(-10px)';
+                    item.style.boxShadow = '0 10px 30px rgba(212, 175, 55, 0.2)';
+                });
+
+                item.addEventListener('mouseleave', () => {
+                    item.style.transform = 'translateY(0)';
+                    item.style.boxShadow = 'none';
+                });
+            });
+
+            // Add smooth scroll behavior for discover button
+            document.querySelector('.discover-button').addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: document.querySelector('.menu-section').offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Add loading animation
+            document.body.style.opacity = '0';
+            requestAnimationFrame(() => {
+                document.body.style.transition = 'opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1)';
+                document.body.style.opacity = '1';
+            });
+        });
+
+        // Add parallax effect for menu items
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelectorAll('.menu-item').forEach(item => {
+                const speed = 0.05;
+                const yPos = -(scrolled * speed);
+                item.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+
+        // Optional: Add keyboard navigation for categories
+        document.addEventListener('keydown', (e) => {
+            const activeButton = document.querySelector('.category-buttondish.active');
+            const buttons = Array.from(categoryButtons);
+            const currentIndex = buttons.indexOf(activeButton);
+
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                const nextIndex = (currentIndex + 1) % buttons.length;
+                buttons[nextIndex].click();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                const prevIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+                buttons[prevIndex].click();
+            }
+        });
+    </script>
+</body>
+</html>

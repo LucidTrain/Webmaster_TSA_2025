@@ -1,0 +1,2264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Verdure Dorée</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tsparticles/1.37.5/tsparticles.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant:ital,wght@0,400;0,600;1,400&family=Great+Vibes&display=swap');
+
+        :root {
+            --dark-green: #0a1f1a;
+            --medium-green: #142b25;
+            --cream: #faf7f2;
+            --gold: #d4af37;
+            --light-gold: #e6d5b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant', serif;
+            background: var(--dark-green);
+            color: var(--cream);
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            background: rgba(10, 31, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+            .navbar.scrolled {
+                padding: 0.8rem 3rem;
+                background: rgba(10, 31, 26, 0.98);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Great Vibes', cursive;
+            color: var(--gold);
+            font-size: 20px;
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .logo-icon::before {
+                content: '';
+                position: absolute;
+                top: -100%;
+                left: -100%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+                opacity: 0;
+                transition: opacity 0.8s ease;
+            }
+
+            .logo-icon:hover::before {
+                opacity: 0.3;
+                animation: shimmer 2s infinite;
+            }
+
+            .logo-icon:hover {
+                transform: rotate(360deg) scale(1.1);
+                background: var(--gold);
+                color: var(--dark-green);
+                box-shadow: 0 0 30px var(--gold);
+            }
+
+        .logo-text {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 2rem;
+            letter-spacing: 2px;
+            transition: all 0.5s ease;
+            position: relative;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+            .logo-text::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: var(--gold);
+                transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+        .logo:hover .logo-text::after {
+            width: 100%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--cream);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.4s ease;
+        }
+
+            .nav-link::before,
+            .nav-link::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 1px;
+                background: var(--gold);
+                transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .nav-link::before {
+                top: 0;
+                left: 0;
+            }
+
+            .nav-link::after {
+                bottom: 0;
+                right: 0;
+            }
+
+            .nav-link:hover {
+                color: var(--gold);
+                transform: translateY(-2px);
+            }
+
+                .nav-link:hover::before,
+                .nav-link:hover::after {
+                    width: 100%;
+                }
+
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider {
+            height: 100%;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: scale(1.1);
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            background-size: cover;
+            background-position: center;
+        }
+
+            .slide.active {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            .slide::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient( to bottom, rgba(10, 31, 26, 0.7), rgba(10, 31, 26, 0.5) );
+                opacity: 0;
+                transition: opacity 1.2s ease;
+            }
+
+            .slide.active::before {
+                opacity: 1;
+            }
+
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 90%;
+            max-width: 1200px;
+            opacity: 0;
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide.active .slide-content {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .slide-title {
+            font-family: 'Cinzel', serif;
+            font-size: 5.5rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .slide.active .slide-title {
+            animation: fadeInUp 1.2s forwards, titleFloat 5s ease-in-out infinite 1.2s;
+        }
+
+        .slide-subtitle {
+            font-family: 'Cormorant', serif;
+            font-size: 2rem;
+            font-style: italic;
+            color: var(--cream);
+            margin-bottom: 2.5rem;
+            letter-spacing: 4px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .slide.active .slide-subtitle {
+            animation: fadeInUp 1.2s forwards 0.6s;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 2.8rem;
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .slide.active .cta-button {
+            animation: fadeInUp 1.2s forwards 1.2s;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: var(--gold);
+            transition: transform 0.8s ease;
+            transform: translate(-50%, -50%) rotate(45deg) translateY(100%);
+            z-index: -1;
+        }
+
+        .cta-button:hover {
+            color: var(--dark-green);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 30px rgba(212, 175, 55, 0.4);
+        }
+
+            .cta-button:hover::before {
+                transform: translate(-50%, -50%) rotate(45deg) translateY(0);
+            }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1.5rem;
+            z-index: 10;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+            .slider-dot::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(0);
+                width: 4px;
+                height: 4px;
+                background: var(--gold);
+                border-radius: 50%;
+                transition: transform 0.4s ease;
+            }
+
+            .slider-dot:hover::before {
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            .slider-dot.active {
+                background: var(--gold);
+                transform: scale(1.3);
+                box-shadow: 0 0 15px var(--gold);
+            }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 8rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--gold);
+            font-size: 1.8rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 2;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+            .scroll-indicator:hover {
+                opacity: 1;
+            }
+
+        @keyframes titleFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(-30px);
+            }
+
+            60% {
+                transform: translateX(-50%) translateY(-15px);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-icon">VLD</div>
+            <div class="logo-text">La Verdure Dorée</div>
+        </div>
+        <div class="nav-links">
+            <a href="newdishes.html" class="nav-link">Menu</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="#contact-reservation001" class="nav-link">Reservations</a>
+            <a href="Ref.html" class="nav-link">References</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="slider">
+            <div class="slide active">
+                <div class="slide-content">
+                    <h1 class="slide-title">La Verdure Dorée</h1>
+                    <p class="slide-subtitle">Where Luxury Meets Plant-Based Perfection</p>
+                    <a href="#" class="cta-button">Reserve Your Experience</a>
+                </div>
+            </div>
+        </div>
+        <div class="slider-nav"></div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <script>
+        const slides = [
+            {
+                image: 'https://www.maisonvalentina.net/en/inspiration-and-ideas/wp-content/uploads/2018/07/luxury_restaurants.jpg',
+                title: 'La Verdure Dorée',
+                subtitle: 'Where Luxury Meets Plant-Based Perfection'
+            },
+            {
+                image: 'https://lux-life.digital/wp-content/uploads/2022/05/Luxury-Dining.jpg',
+                title: 'Culinary Excellence',
+                subtitle: 'Every Dish Tells a Story of Passion and Innovation'
+            },
+            {
+                image: 'https://loveincorporated.blob.core.windows.net/contentimages/gallery/e3e1c2ee-dfa0-4c87-9e93-f5224ff250df-expensive_restaurants_hawaii.jpg',
+                title: 'Nature\'s Finest',
+                subtitle: 'Sustainably Sourced, Artfully Prepared'
+            },
+            {
+                image: 'https://c.ndtvimg.com/2024-01/0ra76fjo_caviar_625x300_04_January_24.jpg',
+                title: 'Elegant Dining',
+                subtitle: 'An Atmosphere of Refined Sophistication'
+            },
+            {
+                image: 'https://media.istockphoto.com/id/911987186/photo/exotic-restaurant-gourmet-food.jpg?s=612x612&w=0&k=20&c=PoUSQ_C-ULM4rPOGZECHzyQgV6SnErtfNDnhSaHcyKU=',
+                title: 'Extraordinary Moments',
+                subtitle: 'Creating Memories That Last a Lifetime'
+            },
+            {
+                image: 'https://img.freepik.com/premium-photo/luxury-delicious-creative-molecular-food_201836-6408.jpg',
+                title: 'Culinary Innovation',
+                subtitle: 'Where Artistry Meets Gastronomy'
+            },
+            {
+                image: 'https://media.istockphoto.com/id/664553476/photo/fancy-dinner.jpg?s=612x612&w=0&k=20&c=68TGJrNgf9wi5vWYXLMuGgvYsaZnu_pYU19iEmtemWs=',
+                title: 'Divine Dining',
+                subtitle: 'Experience the Height of Culinary Excellence'
+            }
+        ];
+
+        const slider = document.querySelector('.slider');
+        const sliderNav = document.querySelector('.slider-nav');
+        let currentSlide = 0;
+        let isTransitioning = false;
+
+        // Initialize slides and navigation dots
+        slides.forEach((slide, index) => {
+            const slideElement = document.createElement('div');
+            slideElement.className = `slide ${index === 0 ? 'active' : ''}`;
+            slideElement.style.backgroundImage = `url(${slide.image})`;
+
+            const content = document.createElement('div');
+            content.className = 'slide-content';
+            content.innerHTML = `
+                                <h1 class="slide-title">${slide.title}</h1>
+                                <p class="slide-subtitle">${slide.subtitle}</p>
+                                <a href="#" class="cta-button">Reserve Your Experience</a>
+                            `;
+
+            slideElement.appendChild(content);
+            slider.appendChild(slideElement);
+
+            const dot = document.createElement('div');
+            dot.className = `slider-dot ${index === 0 ? 'active' : ''}`;
+            dot.addEventListener('click', () => {
+                if (!isTransitioning) {
+                    goToSlide(index);
+                }
+            });
+            sliderNav.appendChild(dot);
+        });
+
+        function goToSlide(index) {
+            if (currentSlide === index || isTransitioning) return;
+
+            isTransitioning = true;
+            const slides = document.querySelectorAll('.slide');
+            const dots = document.querySelectorAll('.slider-dot');
+
+            // Remove active classes
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+
+            // Update current slide
+            currentSlide = index;
+
+            // Add active classes
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+
+            // Reset transition lock after animation completes
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 1200); // Matches the CSS transition duration
+        }
+
+        function nextSlide() {
+            if (!isTransitioning) {
+                goToSlide((currentSlide + 1) % slides.length);
+            }
+        }
+
+        // Auto-advance slides with pause on hover
+        let slideInterval = setInterval(nextSlide, 7000); // Increased interval for better viewing
+
+        slider.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            slideInterval = setInterval(nextSlide, 7000);
+        });
+
+        // Enhanced keyboard navigation with smooth transitions
+        document.addEventListener('keydown', (e) => {
+            if (!isTransitioning) {
+                if (e.key === 'ArrowRight') {
+                    goToSlide((currentSlide + 1) % slides.length);
+                } else if (e.key === 'ArrowLeft') {
+                    goToSlide((currentSlide - 1 + slides.length) % slides.length);
+                }
+            }
+        });
+
+        // Enhanced navbar scroll effect with smooth transitions
+        let lastScroll = 0;
+        const navbar = document.querySelector('.navbar');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            // Add smooth transition for navbar hide/show
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                navbar.style.transform = 'translateY(0)';
+            }
+
+            if (currentScroll > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Smooth scroll for scroll indicator with enhanced animation
+        document.querySelector('.scroll-indicator').addEventListener('click', () => {
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add loading animation with smooth fade-in
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            requestAnimationFrame(() => {
+                document.body.style.transition = 'opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1)';
+                document.body.style.opacity = '1';
+            });
+        });
+
+        // Enhanced parallax effect for slides
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelectorAll('.slide').forEach(slide => {
+                const speed = 0.4;
+                slide.style.transform = `translateY(${scrolled * speed}px) scale(${1 + scrolled * 0.0005})`;
+            });
+        });
+    </script>
+    <style>
+
+
+        #particles-jsabout {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .about-section {
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .about-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-content {
+            margin-bottom: 4rem;
+        }
+
+        .section-subtitle {
+            font-family: 'Great Vibes', cursive;
+            color: var(--gold);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+            animation: glowText 2s infinite alternate;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            color: var(--cream);
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            opacity: 0;
+            transform: translateY(30px);
+            text-shadow: 0 0 20px rgba(250, 247, 242, 0.3);
+        }
+
+        .section-description {
+            font-size: 1.4rem;
+            color: var(--light-gold);
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .gallery-itemabout {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 400px;
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+            .gallery-itemabout img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .gallery-itemabout::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient( to bottom, rgba(10, 31, 26, 0.2), rgba(10, 31, 26, 0.8) );
+                opacity: 0;
+                transition: all 0.6s ease;
+            }
+
+            .gallery-itemabout:hover {
+                transform: translateY(-20px) scale(1.05);
+                box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3);
+            }
+
+                .gallery-itemabout:hover::before {
+                    opacity: 1;
+                }
+
+                .gallery-itemabout:hover img {
+                    transform: scale(1.2);
+                }
+
+        .features-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+            gap: 2rem;
+            margin: 4rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .feature-itemabout {
+            padding: 2rem;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .feature-itemabout::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 300%;
+                height: 300%;
+                background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+                opacity: 0;
+                transform: translate(-50%, -50%);
+                transition: all 0.6s ease;
+            }
+
+            .feature-itemabout:hover::before {
+                opacity: 0.1;
+            }
+
+            .feature-itemabout i {
+                font-size: 2.5rem;
+                color: var(--gold);
+                margin-bottom: 1rem;
+                transition: all 0.4s ease;
+            }
+
+            .feature-itemabout:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+            }
+
+                .feature-itemabout:hover i {
+                    transform: scale(1.2);
+                }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin: 4rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .stat-item {
+            padding: 2rem;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 15px;
+            transition: all 0.4s ease;
+        }
+
+            .stat-item:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+            }
+
+        .stat-numberabout {
+            font-size: 3rem;
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .stat-text {
+            font-size: 1.2rem;
+            color: var(--light-gold);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .cta-buttonabout {
+            display: inline-block;
+            padding: 1.5rem 3.5rem;
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            margin-top: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+            .cta-buttonabout::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 300%;
+                height: 300%;
+                background: var(--gold);
+                transition: transform 0.8s ease;
+                transform: translate(-50%, -50%) rotate(45deg) translateY(100%);
+                z-index: -1;
+            }
+
+            .cta-buttonabout:hover {
+                color: var(--dark-green);
+                transform: translateY(-5px);
+                box-shadow: 0 5px 30px rgba(212, 175, 55, 0.4);
+            }
+
+                .cta-buttonabout:hover::before {
+                    transform: translate(-50%, -50%) rotate(45deg) translateY(0);
+                }
+
+        @keyframes glowText {
+            0% {
+                text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            }
+
+            100% {
+                text-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 1s forwards;
+        }
+
+        @media (max-width: 1200px) {
+            .gallery-container,
+            .features-grid,
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 3rem;
+            }
+
+            .gallery-container,
+            .features-grid,
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-itemabout {
+                height: 300px;
+            }
+        }
+    </style>
+
+    <div id="particles-jsabout"></div>
+    <section class="about-section">
+        <div class="about-container">
+            <div class="about-content">
+                <h3 class="section-subtitle show-on-scrollabout">Our Story</h3>
+                <h2 class="section-title show-on-scrollabout">A Journey Through Culinary Excellence</h2>
+                <p class="section-description show-on-scrollabout">
+                    Nestled in the heart of sophistication, La Verdure Dorée stands as a testament to the marriage of luxury and plant-based gastronomy. Our journey began with a vision to elevate vegetarian cuisine to unprecedented heights, crafting an experience that transcends mere dining to become an artistic celebration of nature's bounty.
+                </p>
+                <p class="section-description show-on-scrollabout">
+                    Each dish tells a story of passion, innovation, and respect for our planet, carefully curated by our world-renowned chefs who transform locally-sourced ingredients into masterpieces that delight both the palate and the soul.
+                </p>
+            </div>
+
+            <div class="gallery-container show-on-scrollabout">
+                <div class="gallery-itemabout">
+                    <img src="https://www.commercialinteriordesign.com/cloud/2021/07/05/indochine-DIFC.jpg" alt="Elegant dining room">
+                </div>
+                <div class="gallery-itemabout">
+                    <img src="https://www.properties.market/ae/blog/wp-content/uploads/2023/08/Best-Restaurant-Interior-Design-Ideas-for-a-Luxurious-Ambiance.png" alt="Luxurious interior">
+                </div>
+                <div class="gallery-itemabout">
+                    <img src="https://media.admiddleeast.com/photos/668af52e1a7e6363be7c2c21/master/w_1600%2Cc_limit/Lena%25203.png" alt="Sophisticated atmosphere">
+                </div>
+                <div class="gallery-itemabout">
+                    <img src="https://cdn.vox-cdn.com/uploads/chorus_image/image/72124715/2021_12_06_Ka_teen_040.0.jpg" alt="Modern dining experience">
+                </div>
+            </div>
+
+            <div class="features-grid show-on-scrollabout">
+                <div class="feature-itemabout">
+                    <i class="fas fa-leaf"></i>
+                    <span>Sustainably Sourced</span>
+                </div>
+                <div class="feature-itemabout">
+                    <i class="fas fa-utensils"></i>
+                    <span>Private Dining</span>
+                </div>
+                <div class="feature-itemabout">
+                    <i class="fas fa-wine-glass-alt"></i>
+                    <span>Curated Experience</span>
+                </div>
+                <div class="feature-itemabout">
+                    <i class="fas fa-tractor"></i>
+                    <span>Farm to Table</span>
+                </div>
+            </div>
+
+            <div class="stats-container show-on-scrollabout">
+                <div class="stat-item">
+                    <i class="fas fa-star stat-icon"></i>
+                    <span class="stat-numberabout" data-value="53">0</span>
+                    <div class="stat-text">Years of Excellence</div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-award stat-icon"></i>
+                    <span class="stat-numberabout" data-value="250">0</span>
+                    <div class="stat-text">Signature Dishes</div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-trophy stat-icon"></i>
+                    <span class="stat-numberabout" data-value="3">0</span>
+                    <div class="stat-text">Michelin Stars</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        // Particle.js configuration
+        tsParticles.load("particles-jsabout", {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: "#d4af37"
+                },
+                shape: {
+                    type: "circle"
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true
+                },
+                size: {
+                    value: 3,
+                    random: true
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#d4af37",
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "repulse"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    repulse: {
+                        distance: 100,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+
+                    // If this is a stat number, start the counter
+                    if (entry.target.classList.contains('stats-container')) {
+                        startCounters();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with show-on-scrollabout class
+        document.querySelectorAll('.show-on-scrollabout').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Number counter animation
+        function startCounters() {
+            const counters = document.querySelectorAll('.stat-numberabout');
+            const speed = 200;
+
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-value');
+                const increment = target / speed;
+
+                let currentCount = 0;
+
+                const updateCount = () => {
+                    if (currentCount < target) {
+                        currentCount += increment;
+                        counter.textContent = Math.ceil(currentCount);
+                        setTimeout(updateCount, 1);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+
+                updateCount();
+            });
+        }
+
+        // Gallery hover effects
+        document.querySelectorAll('.gallery-itemabout').forEach(item => {
+            item.addEventListener('mouseenter', (e) => {
+                const otherItems = document.querySelectorAll('.gallery-itemabout:not(:hover)');
+                otherItems.forEach(other => {
+                    other.style.opacity = '0.7';
+                    other.style.transform = 'scale(0.95)';
+                });
+            });
+
+            item.addEventListener('mouseleave', (e) => {
+                const allItems = document.querySelectorAll('.gallery-itemabout');
+                allItems.forEach(other => {
+                    other.style.opacity = '1';
+                    other.style.transform = 'scale(1)';
+                });
+            });
+        });
+
+        // Feature items hover effect
+        document.querySelectorAll('.feature-itemabout').forEach(item => {
+            item.addEventListener('mouseenter', (e) => {
+                item.querySelector('i').style.transform = 'scale(1.2) rotate(10deg)';
+            });
+
+            item.addEventListener('mouseleave', (e) => {
+                item.querySelector('i').style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Smooth scroll for CTA button
+        document.querySelector('.cta-buttonabout').addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetSection = document.querySelector(e.target.getAttribute('href'));
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+
+        // Add loading animation on page load
+        window.addEventListener('load', () => {
+            const elements = document.querySelectorAll('.show-on-scrollabout');
+            elements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.classList.add('fade-in');
+                }, index * 200);
+            });
+        });
+    </script>
+    <style>
+
+
+        #particles-jsdish {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .menu-section {
+            position: relative;
+            padding: 8rem 2rem;
+            z-index: 2;
+        }
+
+        .menu-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .menu-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        .menu-subtitle {
+            font-family: 'Cormorant', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--cream);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.3s;
+        }
+
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .category-buttondish {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            padding: 1rem 2rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.6s;
+        }
+
+            .category-buttondish::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 300%;
+                height: 300%;
+                background: var(--gold);
+                transition: transform 0.6s ease;
+                transform: translate(-50%, -50%) rotate(45deg) translateY(100%);
+                z-index: -1;
+            }
+
+            .category-buttondish:hover,
+            .category-buttondish.active {
+                color: var(--dark-green);
+                transform: translateY(-5px);
+                box-shadow: 0 5px 30px rgba(212, 175, 55, 0.4);
+            }
+
+                .category-buttondish:hover::before,
+                .category-buttondish.active::before {
+                    transform: translate(-50%, -50%) rotate(45deg) translateY(0);
+                }
+
+        .menu-items-container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .menu-items {
+            display: none;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+            .menu-items.active {
+                display: grid;
+                animation: fadeInUp 1s forwards;
+            }
+
+        .menu-item {
+            background: rgba(20, 43, 37, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            transform: translateY(0);
+        }
+
+            .menu-item:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+                border-color: var(--gold);
+            }
+
+        .item-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .menu-item:hover .item-image {
+            transform: scale(1.1);
+        }
+
+        .item-content {
+            padding: 1.5rem;
+        }
+
+        .item-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .item-description {
+            font-family: 'Cormorant', serif;
+            font-size: 1.1rem;
+            color: var(--cream);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+
+        .item-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .item-tag {
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .item-price {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--cream);
+            margin-top: 0.8rem;
+            font-weight: 600;
+        }
+
+        .discover-button {
+            display: block;
+            width: fit-content;
+            margin: 4rem auto 0;
+            padding: 1.2rem 3rem;
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.9s;
+        }
+
+            .discover-button::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 300%;
+                height: 300%;
+                background: var(--gold);
+                transition: transform 0.6s ease;
+                transform: translate(-50%, -50%) rotate(45deg) translateY(100%);
+                z-index: -1;
+            }
+
+            .discover-button:hover {
+                color: var(--dark-green);
+                transform: translateY(-5px);
+                box-shadow: 0 5px 30px rgba(212, 175, 55, 0.4);
+            }
+
+                .discover-button:hover::before {
+                    transform: translate(-50%, -50%) rotate(45deg) translateY(0);
+                }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-title {
+                font-size: 2.5rem;
+            }
+
+            .menu-subtitle {
+                font-size: 1.4rem;
+            }
+
+            .menu-categories {
+                gap: 1rem;
+            }
+
+            .category-buttondish {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+
+    <div id="particles-jsdish"></div>
+    <section class="menu-section">
+        <div class="menu-header">
+            <h2 class="menu-title">Our Culinary Masterpieces</h2>
+            <p class="menu-subtitle">A Symphony of Flavors Crafted with Passion</p>
+        </div>
+
+        <div class="menu-categories">
+            <button class="category-buttondish active" data-category="main">Main Courses</button>
+            <button class="category-buttondish" data-category="sides">Starters & Sides</button>
+            <button class="category-buttondish" data-category="desserts">Desserts</button>
+            <button class="category-buttondish" data-category="drinks">Drinks</button>
+        </div>
+
+        <div class="menu-items-container">
+            <div class="menu-items active" id="main">
+                <!-- Main courses will be populated by JavaScript -->
+            </div>
+            <div class="menu-items" id="sides">
+                <!-- Sides will be populated by JavaScript -->
+            </div>
+            <div class="menu-items" id="desserts">
+                <!-- Desserts will be populated by JavaScript -->
+            </div>
+            <div class="menu-items" id="drinks">
+                <!-- Drinks will be populated by JavaScript -->
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        // Particles.js configuration
+        particlesJS('particles-jsdish', {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: '#d4af37' },
+                shape: { type: 'circle' },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    animation: { enable: true, speed: 1, minimumValue: 0.1, sync: false }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    animation: { enable: true, speed: 2, minimumValue: 0.1, sync: false }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#d4af37',
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: false,
+                    straight: false,
+                    outModes: { default: 'out' },
+                    attract: { enable: false, rotateX: 600, rotateY: 1200 }
+                }
+            },
+            interactivity: {
+                detectsOn: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'repulse' },
+                    onclick: { enable: true, mode: 'push' },
+                    resize: true
+                },
+                modes: {
+                    repulse: { distance: 100, duration: 0.4 },
+                    push: { particles_nb: 4 }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Menu data
+        const menuData = {
+            main: [
+                {
+                    name: 'Veggie Pizza',
+                    price: '$18.99',
+                    image: 'https://www.papajohns.com/vegetarian-pizza/img/vegetarian-hero.jpg',
+                    description: 'A vibrant medley of fresh garden vegetables on our signature artisanal crust, finished with herb-infused olive oil.',
+                    tags: ['Vegetarian', 'House Favorite']
+                },
+                {
+                    name: 'Cheese Pizza',
+                    price: '$16.99',
+                    image: 'https://www.papajohns.com/pizza-pages/img/hero.jpg',
+                    description: 'Our classic pizza featuring a perfect blend of five premium cheeses atop our secret recipe tomato sauce.',
+                    tags: ['Vegetarian', 'Classic']
+                },
+                {
+                    name: 'Burger & Fries Meal',
+                    price: '$21.99',
+                    image: 'https://www.sheknows.com/wp-content/uploads/2019/01/mcdonalds-bacon-items.jpg',
+                    description: 'A juicy premium beef patty with all the fixings, served with golden crispy fries and our signature dipping sauce.',
+                    tags: ['Popular', 'Comfort Food']
+                },
+                {
+                    name: 'Gourmet Burger Platter',
+                    price: '$24.99',
+                    image: 'https://www.seriouseats.com/thmb/d2DYiLy-rNKmxrW1gchCOZcGIWY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/20210607-INNOUTBURGERS-JANJIGIAN-seriouseats-23-b2b8a505ff414272aab71590a8985b85.jpg',
+                    description: 'Prime Angus beef with caramelized onions, aged cheddar, and truffle aioli, accompanied by gourmet sides.',
+                    tags: ['Chef\'s Special', 'Premium']
+                },
+                {
+                    name: 'Artisanal Sandwich',
+                    price: '$19.99',
+                    image: 'https://www.allrecipes.com/thmb/m8Q8v8TmfCqVAXuxYIwu-DooSjw=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/ar-cold-sub-taste-test-main-2-4x3-9e302eec508149aea9b7853b28646c82.jpg',
+                    description: 'Freshly baked sourdough filled with premium cold cuts, aged cheeses, and house-made condiments.',
+                    tags: ['New', 'Seasonal']
+                }
+            ],
+            sides: [
+                {
+                    name: 'Falafel Plate',
+                    price: '$12.99',
+                    image: 'https://www.dimitrasdishes.com/wp-content/uploads/2021/03/WEB-WIDE-Side-Closeup-1024x683.jpg',
+                    description: 'Crispy herb-infused chickpea fritters served with tahini sauce, fresh vegetables and warm pita bread.',
+                    tags: ['Vegan', 'Gluten-Free Option']
+                },
+                {
+                    name: 'Corn Soup',
+                    price: '$9.99',
+                    image: 'https://therecipecritic.com/wp-content/uploads/2018/10/IMG_5960.jpg',
+                    description: 'Creamy sweet corn soup with a hint of truffle, garnished with chives and crème fraîche.',
+                    tags: ['Vegetarian', 'Seasonal']
+                },
+                {
+                    name: 'Cheese Bread',
+                    price: '$8.99',
+                    image: 'https://therecipecritic.com/wp-content/uploads/2020/02/cheesy_garlic_bread.jpg',
+                    description: 'Warm artisan bread topped with garlic butter and a blend of melted premium cheeses.',
+                    tags: ['Vegetarian', 'Shareable']
+                },
+                {
+                    name: 'Cheese Sticks',
+                    price: '$10.99',
+                    image: 'https://www.allrecipes.com/thmb/hubOWXvWGhHffS5-vKMU8-KEabI=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/23596-fried-mozzarella-cheese-sticks-2x1-253-2599fbbad55d4608a7ea9a852d2f8ae5.jpg',
+                    description: 'Hand-breaded mozzarella sticks, fried to golden perfection and served with marinara sauce.',
+                    tags: ['Vegetarian', 'Popular']
+                }
+            ],
+            desserts: [
+                {
+                    name: 'Tiramisu',
+                    price: '$12.99',
+                    image: 'https://static01.nyt.com/images/2017/04/05/dining/05COOKING-TIRAMISU1/05COOKING-TIRAMISU1-square640.jpg',
+                    description: 'Layers of coffee-soaked ladyfingers and mascarpone cream, dusted with premium cocoa powder.',
+                    tags: ['Classic', 'Contains Alcohol']
+                },
+                {
+                    name: 'Chocolate Mousse',
+                    price: '$11.99',
+                    image: 'https://www.thehungrybites.com/wp-content/uploads/2016/11/easy-chocolate-mousse-cake-featured.jpg',
+                    description: 'Silky smooth dark chocolate mousse topped with fresh berries and edible gold leaf.',
+                    tags: ['Signature Dessert', 'Rich']
+                },
+                {
+                    name: 'Strawberry Cheesecake',
+                    price: '$13.99',
+                    image: 'https://sugarspunrun.com/wp-content/uploads/2023/06/Strawberry-cheesecake-recipe-6-of-8.jpg',
+                    description: 'Creamy New York style cheesecake with a graham cracker crust and fresh strawberry compote.',
+                    tags: ['Seasonal', 'Popular']
+                }
+            ],
+            drinks: [
+                {
+                    name: 'Custom Soda',
+                    price: '$5.99',
+                    image: 'https://pitaloca.deelzoo.com/wp-content/uploads/sites/1093/2022/09/Soda.jpg',
+                    description: 'House-made soda with your choice of natural fruit syrups and fresh herbs, served over ice.',
+                    tags: ['Customizable', 'Refillable']
+                },
+                {
+                    name: 'Custom Boba',
+                    price: '$6.99',
+                    image: 'https://bubblepanda.com/cdn/shop/articles/bubble-tea-ingredients.jpg',
+                    description: 'Handcrafted boba tea with premium loose leaf tea, your choice of milk, and tapioca pearls.',
+                    tags: ['Customizable', 'Popular']
+                },
+                {
+                    name: 'Custom Shake',
+                    price: '$7.99',
+                    image: 'https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FRecipes%2F2020-07-how-to-make-a-milkshake-at-home%2F2020-06-08_AT-K19388',
+                    description: 'Creamy milkshake made with artisanal ice cream and your choice of mix-ins and toppings.',
+                    tags: ['Customizable', 'Indulgent']
+                },
+                {
+                    name: 'Mango Lassi',
+                    price: '$6.99',
+                    image: 'https://www.indianhealthyrecipes.com/wp-content/uploads/2022/04/mango-lassi-recipe.jpg',
+                    description: 'Refreshing blend of ripe Alphonso mangoes, creamy yogurt, and a hint of cardamom.',
+                    tags: ['Signature Drink', 'Seasonal']
+                }
+            ]
+        };
+
+        // Function to create menu items
+        function createMenuItem(item) {
+            const tagElements = item.tags ? item.tags.map(tag => `<span class="item-tag">${tag}</span>`).join('') : '';
+
+            return `
+                            <div class="menu-item">
+                                <img src="${item.image}" alt="${item.name}" class="item-image">
+                                <div class="item-content">
+                                    <h3 class="item-name">${item.name}</h3>
+                                    <p class="item-description">${item.description}</p>
+                                    <div class="item-tags">
+                                        ${tagElements}
+                                    </div>
+                                    <p class="item-price">${item.price}</p>
+                                </div>
+                            </div>
+                        `;
+        }
+
+        // Initialize menu items
+        function initializeMenuItems() {
+            Object.keys(menuData).forEach(category => {
+                const container = document.getElementById(category);
+                container.innerHTML = menuData[category].map(item => createMenuItem(item)).join('');
+            });
+        }
+
+        // Category switching logic
+        const categoryButtons = document.querySelectorAll('.category-buttondish');
+        const menuItemsContainers = document.querySelectorAll('.menu-items');
+
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and containers
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                menuItemsContainers.forEach(container => container.classList.remove('active'));
+
+                // Add active class to clicked button and corresponding container
+                button.classList.add('active');
+                const category = button.dataset.category;
+                document.getElementById(category).classList.add('active');
+
+                // Trigger animation for newly visible items
+                const items = document.getElementById(category).children;
+                Array.from(items).forEach((item, index) => {
+                    item.style.animation = `fadeInUp 0.5s forwards ${index * 0.1}s`;
+                });
+            });
+        });
+
+        // Intersection Observer for animation on scroll
+        const observerw = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        // Observe all menu items
+        document.querySelectorAll('.menu-item').forEach(item => {
+            observerw.observe(item);
+        });
+
+        // Initialize menu on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeMenuItems();
+
+            // Add hover effect for menu items
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    item.style.transform = 'translateY(-10px)';
+                    item.style.boxShadow = '0 10px 30px rgba(212, 175, 55, 0.2)';
+                });
+
+                item.addEventListener('mouseleave', () => {
+                    item.style.transform = 'translateY(0)';
+                    item.style.boxShadow = 'none';
+                });
+            });
+
+            // Add smooth scroll behavior for discover button
+            document.querySelector('.discover-button').addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: document.querySelector('.menu-section').offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Add loading animation
+            document.body.style.opacity = '0';
+            requestAnimationFrame(() => {
+                document.body.style.transition = 'opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1)';
+                document.body.style.opacity = '1';
+            });
+        });
+
+        // Add parallax effect for menu items
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            document.querySelectorAll('.menu-item').forEach(item => {
+                const speed = 0.05;
+                const yPos = -(scrolled * speed);
+                item.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+
+        // Optional: Add keyboard navigation for categories
+        document.addEventListener('keydown', (e) => {
+            const activeButton = document.querySelector('.category-buttondish.active');
+            const buttons = Array.from(categoryButtons);
+            const currentIndex = buttons.indexOf(activeButton);
+
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                const nextIndex = (currentIndex + 1) % buttons.length;
+                buttons[nextIndex].click();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                const prevIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+                buttons[prevIndex].click();
+            }
+        });
+    </script>
+    <style>
+
+        .footer-section {
+            position: relative;
+            padding: 8rem 0 0;
+            background: linear-gradient(to bottom, var(--dark-green), #061310);
+        }
+
+        #particles-jsbtm {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .reservation-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 6rem;
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .form-container {
+            background: rgba(20, 43, 37, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(0);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+            .form-container:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+            }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+            .section-title::after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100px;
+                height: 2px;
+                background: var(--gold);
+            }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(250, 247, 242, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 5px;
+            color: var(--cream);
+            font-family: 'Cormorant', serif;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+            .form-input:focus {
+                outline: none;
+                border-color: var(--gold);
+                background: rgba(250, 247, 242, 0.15);
+                box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+            }
+
+        .submit-btn, .cta-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gold);
+            border: none;
+            border-radius: 5px;
+            color: var(--dark-green);
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+        }
+
+            .submit-btn::before, .cta-btn::before {
+                content: '';
+                position: absolute;
+                top: -100%;
+                left: -100%;
+                width: 300%;
+                height: 300%;
+                background: radial-gradient(circle, rgba(250, 247, 242, 0.3) 0%, transparent 70%);
+                transition: transform 0.6s ease;
+                transform: rotate(45deg);
+            }
+
+            .submit-btn:hover, .cta-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+            }
+
+                .submit-btn:hover::before, .cta-btn:hover::before {
+                    transform: rotate(45deg) translate(50%, 50%);
+                }
+
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            height: 300px;
+        }
+
+            .map-container iframe {
+                width: 100%;
+                height: 100%;
+                border: 0;
+            }
+
+        .hours-container {
+            padding: 2rem;
+            border: 1px solid var(--gold);
+            border-radius: 10px;
+            background: rgba(10, 31, 26, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .hours-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .hours-list {
+            list-style: none;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .footer {
+            background: var(--medium-green);
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+            .footer-column h3::after {
+                content: '';
+                position: absolute;
+                bottom: -8px;
+                left: 0;
+                width: 50px;
+                height: 2px;
+                background: var(--gold);
+            }
+
+        .footer-column p {
+            color: var(--cream);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+            .footer-links li {
+                margin-bottom: 0.8rem;
+            }
+
+            .footer-links a {
+                color: var(--cream);
+                text-decoration: none;
+                transition: all 0.3s ease;
+            }
+
+                .footer-links a:hover {
+                    color: var(--gold);
+                    padding-left: 5px;
+                }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            color: var(--gold);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+            .social-icon:hover {
+                color: var(--cream);
+                transform: translateY(-3px);
+            }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .footer-text {
+            color: var(--cream);
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem;
+            background: rgba(250, 247, 242, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 5px;
+            color: var(--cream);
+            font-family: 'Cormorant', serif;
+        }
+
+        .newsletter-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--gold);
+            border: none;
+            border-radius: 5px;
+            color: var(--dark-green);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+            .newsletter-btn:hover {
+                background: var(--cream);
+            }
+
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .reservation-section {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <div id="contact-reservation001"></div>
+
+        <section class="footer-section">
+            <div id="particles-jsbtm"></div>
+            <div class="content-wrapper">
+                <div class="reservation-section">
+                    <div class="form-container">
+                        <h2 class="section-title">Make a Reservation</h2>
+                        <form id="reservation-form">
+                            <div class="form-group">
+                                <label class="form-label">Name</label>
+                                <input type="text" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Date</label>
+                                <input type="date" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Time</label>
+                                <input type="time" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Number of Guests</label>
+                                <input type="number" class="form-input" min="1" max="10" required>
+                            </div>
+                            <button type="submit" class="submit-btn">Reserve Your Table</button>
+                        </form>
+                    </div>
+                    <div class="right-column">
+                        <div class="map-container">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24039.650634199747!2d-73.87270983955078!3d41.11759899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2bef3d2c2d91d%3A0x5e0b01c0b54d8f91!2sSleepy%20Hollow%2C%20NY!5e0!3m2!1sen!2sus!4v1653438269855!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <div class="hours-container">
+                            <h3 class="hours-title">Hours of Operation</h3>
+                            <ul class="hours-list">
+                                <li>Monday - Thursday: 5:00 PM - 10:00 PM</li>
+                                <li>Friday - Saturday: 5:00 PM - 11:00 PM</li>
+                                <li>Sunday: 5:00 PM - 9:00 PM</li>
+                            </ul>
+                        </div>
+                        <a href="#reservation-details" class="cta-btn">Reservation Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="footer">
+                <div class="content-wrapper">
+                    <div class="footer-grid">
+                        <div class="footer-column">
+                            <h3>About Us</h3>
+                            <p>La Verdure Dorée brings the finest French cuisine to Sleepy Hollow. Our commitment to excellence and sustainable ingredients creates an unforgettable dining experience.</p>
+                            <div class="social-links">
+                                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                            </div>
+                        </div>
+                        <div class="footer-column">
+                            <h3>Quick Links</h3>
+                            <ul class="footer-links">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Menu</a></li>
+                                <li><a href="#">
+                                <li><a href="#">Reservations</a></li>
+                                <li><a href="#">Private Events</a></li>
+                                <li><a href="#">Gift Cards</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h3>Contact Info</h3>
+                            <ul class="footer-links">
+                                <li><i class="fas fa-map-marker-alt"></i> 123 Valley Street, Sleepy Hollow, NY</li>
+                                <li><i class="fas fa-phone"></i> (914) 555-0123</li>
+                                <li><i class="fas fa-envelope"></i> info@verduredoree.com</li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h3>Newsletter</h3>
+                            <p>Subscribe to our newsletter for special offers and updates.</p>
+                            <form class="newsletter-form">
+                                <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                                <button type="submit" class="newsletter-btn">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="footer-bottom">
+                        <p class="footer-text">&copy; 2025 La Verdure Dorée. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </section>
+
+        <script>
+            // Initialize Particles.js
+            particlesJS('particles-jsbtm', {
+                particles: {
+                    number: {
+                        value: 80,
+                        density: {
+                            enable: true,
+                            value_area: 800
+                        }
+                    },
+                    color: {
+                        value: '#d4af37'
+                    },
+                    shape: {
+                        type: 'circle'
+                    },
+                    opacity: {
+                        value: 0.5,
+                        random: true
+                    },
+                    size: {
+                        value: 3,
+                        random: true
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: '#d4af37',
+                        opacity: 0.2,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 2,
+                        direction: 'none',
+                        random: true,
+                        straight: false,
+                        out_mode: 'out',
+                        bounce: false
+                    }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: 'grab'
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: 'push'
+                        },
+                        resize: true
+                    }
+                },
+                retina_detect: true
+            });
+
+            // Form handling with animations
+            document.getElementById('reservation-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = e.target.querySelector('.submit-btn');
+                btn.innerHTML = 'Reservation Confirmed!';
+                btn.style.background = '#2ecc71';
+
+                setTimeout(() => {
+                    btn.innerHTML = 'Reserve Your Table';
+                    btn.style.background = '';
+                    e.target.reset();
+                }, 3000);
+            });
+
+            // Newsletter form handling
+            document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const btn = e.target.querySelector('.newsletter-btn');
+                const input = e.target.querySelector('.newsletter-input');
+                btn.innerHTML = 'Subscribed!';
+                btn.style.background = '#2ecc71';
+
+                setTimeout(() => {
+                    btn.innerHTML = 'Subscribe';
+                    btn.style.background = '';
+                    input.value = '';
+                }, 3000);
+            });
+
+            // Smooth scroll animation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

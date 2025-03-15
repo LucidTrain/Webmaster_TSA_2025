@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<!---->
+<!---->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Verdure Dorée - About Us</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tsparticles/1.37.5/tsparticles.min.js"></script>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant:ital,wght@0,400;0,600;1,400&family=Great+Vibes&display=swap');
+
+        :root {
+            --dark-green: #0a1f1a;
+            --medium-green: #142b25;
+            --cream: #faf7f2;
+            --gold: #d4af37;
+            --light-gold: #e6d5b8;
+        }
+
+
+
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: 'Cormorant', serif;
+            background: var(--dark-green);
+            color: var(--cream);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 95%;
+            padding: 1.5rem 3rem;
+            background: rgba(10, 31, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+            .navbar.scrolled {
+                padding: 0.8rem 3rem;
+                background: rgba(10, 31, 26, 0.98);
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Great Vibes', cursive;
+            color: var(--gold);
+            font-size: 20px;
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .logo-icon::before {
+                content: '';
+                position: absolute;
+                top: -100%;
+                left: -100%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+                opacity: 0;
+                transition: opacity 0.8s ease;
+            }
+
+            .logo-icon:hover::before {
+                opacity: 0.3;
+                animation: shimmer 2s infinite;
+            }
+
+            .logo-icon:hover {
+                transform: rotate(360deg) scale(1.1);
+                background: var(--gold);
+                color: var(--dark-green);
+                box-shadow: 0 0 30px var(--gold);
+            }
+
+        .logo-text {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 2rem;
+            letter-spacing: 2px;
+            transition: all 0.5s ease;
+            position: relative;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+            .logo-text::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: var(--gold);
+                transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+        .logo:hover .logo-text::after {
+            width: 100%;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--cream);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.4s ease;
+        }
+
+            .nav-link::before,
+            .nav-link::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 1px;
+                background: var(--gold);
+                transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .nav-link::before {
+                top: 0;
+                left: 0;
+            }
+
+            .nav-link::after {
+                bottom: 0;
+                right: 0;
+            }
+
+            .nav-link:hover {
+                color: var(--gold);
+                transform: translateY(-2px);
+            }
+
+                .nav-link:hover::before,
+                .nav-link:hover::after {
+                    width: 100%;
+                }
+
+
+        #particles-jsabout {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .about-section {
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .about-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-content {
+            margin-bottom: 4rem;
+        }
+
+        .section-subtitle {
+            font-family: 'Great Vibes', cursive;
+            color: var(--gold);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+            animation: glowText 2s infinite alternate;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            color: var(--cream);
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            opacity: 0;
+            transform: translateY(30px);
+            text-shadow: 0 0 20px rgba(250, 247, 242, 0.3);
+        }
+
+        .section-description {
+            font-size: 1.4rem;
+            color: var(--light-gold);
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin: 4rem 0;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .gallery-itemabout {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 400px;
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+            .gallery-itemabout img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .gallery-itemabout::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient( to bottom, rgba(10, 31, 26, 0.2), rgba(10, 31, 26, 0.8) );
+                opacity: 0;
+                transition: all 0.6s ease;
+            }
+
+            .gallery-itemabout:hover {
+                transform: translateY(-20px) scale(1.05);
+                box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3);
+            }
+
+                .gallery-itemabout:hover::before {
+                    opacity: 1;
+                }
+
+                .gallery-itemabout:hover img {
+                    transform: scale(1.2);
+                }
+
+        .features-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+            gap: 2rem;
+            margin: 4rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .feature-itemabout {
+            padding: 2rem;
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .feature-itemabout::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 300%;
+                height: 300%;
+                background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+                opacity: 0;
+                transform: translate(-50%, -50%);
+                transition: all 0.6s ease;
+            }
+
+            .feature-itemabout:hover::before {
+                opacity: 0.1;
+            }
+
+            .feature-itemabout i {
+                font-size: 2.5rem;
+                color: var(--gold);
+                margin-bottom: 1rem;
+                transition: all 0.4s ease;
+            }
+
+            .feature-itemabout:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+            }
+
+                .feature-itemabout:hover i {
+                    transform: scale(1.2);
+                }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            margin: 4rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .stat-item {
+            padding: 2rem;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 15px;
+            transition: all 0.4s ease;
+        }
+
+            .stat-item:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+            }
+
+        .stat-numberabout {
+            font-size: 3rem;
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .stat-text {
+            font-size: 1.2rem;
+            color: var(--light-gold);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .cta-buttonabout {
+            display: inline-block;
+            padding: 1.5rem 3.5rem;
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            margin-top: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+            .cta-buttonabout::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 300%;
+                height: 300%;
+                background: var(--gold);
+                transition: transform 0.8s ease;
+                transform: translate(-50%, -50%) rotate(45deg) translateY(100%);
+                z-index: -1;
+            }
+
+            .cta-buttonabout:hover {
+                color: var(--dark-green);
+                transform: translateY(-5px);
+                box-shadow: 0 5px 30px rgba(212, 175, 55, 0.4);
+            }
+
+                .cta-buttonabout:hover::before {
+                    transform: translate(-50%, -50%) rotate(45deg) translateY(0);
+                }
+
+        @keyframes glowText {
+            0% {
+                text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            }
+
+            100% {
+                text-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 1s forwards;
+        }
+
+        @media (max-width: 1200px) {
+            .gallery-container,
+            .features-grid,
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 3rem;
+            }
+
+            .gallery-container,
+            .features-grid,
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-itemabout {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-icon">VLD</div>
+            <div class="logo-text">La Verdure Dorée</div>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="nav-link">Menu</a>
+            <a href="#" class="nav-link">About</a>
+            <a href="#" class="nav-link">Reservations</a>
+            <a href="#" class="nav-link">Contact</a>
+        </div>
+    </nav>
+    <div id="particles-jsabout"></div>
+    <section class="about-section">
+        <div class="about-container">
+            <div class="about-content">
+                <h3 class="section-subtitle show-on-scrollabout">Our Story</h3>
+                <h2 class="section-title show-on-scrollabout">A Journey Through Culinary Excellence</h2>
+                <p class="section-description show-on-scrollabout">
+                    Nestled in the heart of sophistication, La Verdure Dorée stands as a testament to the marriage of luxury and plant-based gastronomy. Our journey began with a vision to elevate vegetarian cuisine to unprecedented heights, crafting an experience that transcends mere dining to become an artistic celebration of nature's bounty.
+                </p>
+                <p class="section-description show-on-scrollabout">
+                    Each dish tells a story of passion, innovation, and respect for our planet, carefully curated by our world-renowned chefs who transform locally-sourced ingredients into masterpieces that delight both the palate and the soul.
+                </p>
+            </div>
+
+            <div class="gallery-container show-on-scrollabout">
+                <div class="gallery-itemabout">
+                    <img src="https://www.commercialinteriordesign.com/cloud/2021/07/05/indochine-DIFC.jpg" alt="Elegant dining room">
+                </div>
+                <div class="gallery-itemabout">
+                    <img src="https://www.properties.market/ae/blog/wp-content/uploads/2023/08/Best-Restaurant-Interior-Design-Ideas-for-a-Luxurious-Ambiance.png" alt="Luxurious interior">
+                </div>
+                <div class="gallery-itemabout">
+                    <img src="https://media.admiddleeast.com/photos/668af52e1a7e6363be7c2c21/master/w_1600%2Cc_limit/Lena%25203.png" alt="Sophisticated atmosphere">
+                </div>
+                <div class="gallery-itemabout">
+                    <img src="https://cdn.vox-cdn.com/uploads/chorus_image/image/72124715/2021_12_06_Ka_teen_040.0.jpg" alt="Modern dining experience">
+                </div>
+            </div>
+
+            <div class="features-grid show-on-scrollabout">
+                <div class="feature-itemabout">
+                    <i class="fas fa-leaf"></i>
+                    <span>Sustainably Sourced</span>
+                </div>
+                <div class="feature-itemabout">
+                    <i class="fas fa-utensils"></i>
+                    <span>Private Dining</span>
+                </div>
+                <div class="feature-itemabout">
+                    <i class="fas fa-wine-glass-alt"></i>
+                    <span>Curated Experience</span>
+                </div>
+                <div class="feature-itemabout">
+                    <i class="fas fa-tractor"></i>
+                    <span>Farm to Table</span>
+                </div>
+            </div>
+
+            <div class="stats-container show-on-scrollabout">
+                <div class="stat-item">
+                    <i class="fas fa-star stat-icon"></i>
+                    <span class="stat-numberabout" data-value="53">0</span>
+                    <div class="stat-text">Years of Excellence</div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-award stat-icon"></i>
+                    <span class="stat-numberabout" data-value="250">0</span>
+                    <div class="stat-text">Signature Dishes</div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-trophy stat-icon"></i>
+                    <span class="stat-numberabout" data-value="3">0</span>
+                    <div class="stat-text">Michelin Stars</div>
+                </div>
+            </div>
+
+            <a href="#" class="cta-buttonabout show-on-scrollabout">Learn More</a>
+        </div>
+    </section>
+
+    <script>
+        // Particle.js configuration
+        tsParticles.load("particles-jsabout", {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: "#d4af37"
+                },
+                shape: {
+                    type: "circle"
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true
+                },
+                size: {
+                    value: 3,
+                    random: true
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#d4af37",
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "repulse"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    repulse: {
+                        distance: 100,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+
+                    // If this is a stat number, start the counter
+                    if (entry.target.classList.contains('stats-container')) {
+                        startCounters();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with show-on-scrollabout class
+        document.querySelectorAll('.show-on-scrollabout').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Number counter animation
+        function startCounters() {
+            const counters = document.querySelectorAll('.stat-numberabout');
+            const speed = 200;
+
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-value');
+                const increment = target / speed;
+
+                let currentCount = 0;
+
+                const updateCount = () => {
+                    if (currentCount < target) {
+                        currentCount += increment;
+                        counter.textContent = Math.ceil(currentCount);
+                        setTimeout(updateCount, 1);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+
+                updateCount();
+            });
+        }
+
+        // Gallery hover effects
+        document.querySelectorAll('.gallery-itemabout').forEach(item => {
+            item.addEventListener('mouseenter', (e) => {
+                const otherItems = document.querySelectorAll('.gallery-itemabout:not(:hover)');
+                otherItems.forEach(other => {
+                    other.style.opacity = '0.7';
+                    other.style.transform = 'scale(0.95)';
+                });
+            });
+
+            item.addEventListener('mouseleave', (e) => {
+                const allItems = document.querySelectorAll('.gallery-itemabout');
+                allItems.forEach(other => {
+                    other.style.opacity = '1';
+                    other.style.transform = 'scale(1)';
+                });
+            });
+        });
+
+        // Feature items hover effect
+        document.querySelectorAll('.feature-itemabout').forEach(item => {
+            item.addEventListener('mouseenter', (e) => {
+                item.querySelector('i').style.transform = 'scale(1.2) rotate(10deg)';
+            });
+
+            item.addEventListener('mouseleave', (e) => {
+                item.querySelector('i').style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Smooth scroll for CTA button
+        document.querySelector('.cta-buttonabout').addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetSection = document.querySelector(e.target.getAttribute('href'));
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        });
+
+        // Add loading animation on page load
+        window.addEventListener('load', () => {
+            const elements = document.querySelectorAll('.show-on-scrollabout');
+            elements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.classList.add('fade-in');
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>:

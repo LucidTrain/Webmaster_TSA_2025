@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Verdure Dorée - Footer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant:ital,wght@0,400;0,600;1,400&family=Great+Vibes&display=swap');
+
+        :root {
+            --dark-green: #0a1f1a;
+            --medium-green: #142b25;
+            --cream: #faf7f2;
+            --gold: #d4af37;
+            --light-gold: #e6d5b8;
+        }
+
+
+
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: 'Cormorant', serif;
+            background: var(--dark-green);
+            color: var(--cream);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .footer-section {
+            position: relative;
+            padding: 8rem 0 0;
+            background: linear-gradient(to bottom, var(--dark-green), #061310);
+        }
+
+        #particles-jsbtm {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .reservation-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 6rem;
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .form-container {
+            background: rgba(20, 43, 37, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(0);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .form-container:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(250, 247, 242, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 5px;
+            color: var(--cream);
+            font-family: 'Cormorant', serif;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(250, 247, 242, 0.15);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .submit-btn, .cta-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gold);
+            border: none;
+            border-radius: 5px;
+            color: var(--dark-green);
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .submit-btn::before, .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, rgba(250, 247, 242, 0.3) 0%, transparent 70%);
+            transition: transform 0.6s ease;
+            transform: rotate(45deg);
+        }
+
+        .submit-btn:hover, .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .submit-btn:hover::before, .cta-btn:hover::before {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        .map-container {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            height: 300px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .hours-container {
+            padding: 2rem;
+            border: 1px solid var(--gold);
+            border-radius: 10px;
+            background: rgba(10, 31, 26, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .hours-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .hours-list {
+            list-style: none;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .footer {
+            background: var(--medium-green);
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-column h3 {
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--gold);
+        }
+
+        .footer-column p {
+            color: var(--cream);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--cream);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            color: var(--gold);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            color: var(--cream);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .footer-text {
+            color: var(--cream);
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 0.8rem;
+            background: rgba(250, 247, 242, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 5px;
+            color: var(--cream);
+            font-family: 'Cormorant', serif;
+        }
+
+        .newsletter-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--gold);
+            border: none;
+            border-radius: 5px;
+            color: var(--dark-green);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background: var(--cream);
+        }
+
+        @media (max-width: 1024px) {
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .reservation-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="footer-section">
+        <div id="particles-jsbtm"></div>
+        <div class="content-wrapper">
+            <div class="reservation-section">
+                <div class="form-container">
+                    <h2 class="section-title">Make a Reservation</h2>
+                    <form id="reservation-form">
+                        <div class="form-group">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Date</label>
+                            <input type="date" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Time</label>
+                            <input type="time" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Number of Guests</label>
+                            <input type="number" class="form-input" min="1" max="10" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Reserve Your Table</button>
+                    </form>
+                </div>
+                <div class="right-column">
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24039.650634199747!2d-73.87270983955078!3d41.11759899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2bef3d2c2d91d%3A0x5e0b01c0b54d8f91!2sSleepy%20Hollow%2C%20NY!5e0!3m2!1sen!2sus!4v1653438269855!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                    <div class="hours-container">
+                        <h3 class="hours-title">Hours of Operation</h3>
+                        <ul class="hours-list">
+                            <li>Monday - Thursday: 5:00 PM - 10:00 PM</li>
+                            <li>Friday - Saturday: 5:00 PM - 11:00 PM</li>
+                            <li>Sunday: 5:00 PM - 9:00 PM</li>
+                        </ul>
+                    </div>
+                    <a href="#reservation-details" class="cta-btn">Reservation Details</a>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="content-wrapper">
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <h3>About Us</h3>
+                        <p>La Verdure Dorée brings the finest French cuisine to Sleepy Hollow. Our commitment to excellence and sustainable ingredients creates an unforgettable dining experience.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Menu</a></li>
+                            <li><a href="#">
+                            <li><a href="#">Reservations</a></li>
+                            <li><a href="#">Private Events</a></li>
+                            <li><a href="#">Gift Cards</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Contact Info</h3>
+                        <ul class="footer-links">
+                            <li><i class="fas fa-map-marker-alt"></i> 123 Valley Street, Sleepy Hollow, NY</li>
+                            <li><i class="fas fa-phone"></i> (914) 555-0123</li>
+                            <li><i class="fas fa-envelope"></i> info@verduredoree.com</li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Newsletter</h3>
+                        <p>Subscribe to our newsletter for special offers and updates.</p>
+                        <form class="newsletter-form">
+                            <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                            <button type="submit" class="newsletter-btn">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p class="footer-text">&copy; 2025 La Verdure Dorée. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </section>
+
+    <script>
+        // Initialize Particles.js
+        particlesJS('particles-jsbtm', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#d4af37'
+                },
+                shape: {
+                    type: 'circle'
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true
+                },
+                size: {
+                    value: 3,
+                    random: true
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#d4af37',
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out',
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'grab'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                }
+            },
+            retina_detect: true
+        });
+
+        // Form handling with animations
+        document.getElementById('reservation-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('.submit-btn');
+            btn.innerHTML = 'Reservation Confirmed!';
+            btn.style.background = '#2ecc71';
+            
+            setTimeout(() => {
+                btn.innerHTML = 'Reserve Your Table';
+                btn.style.background = '';
+                e.target.reset();
+            }, 3000);
+        });
+
+        // Newsletter form handling
+        document.querySelector('.newsletter-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('.newsletter-btn');
+            const input = e.target.querySelector('.newsletter-input');
+            btn.innerHTML = 'Subscribed!';
+            btn.style.background = '#2ecc71';
+            
+            setTimeout(() => {
+                btn.innerHTML = 'Subscribe';
+                btn.style.background = '';
+                input.value = '';
+            }, 3000);
+        });
+
+        // Smooth scroll animation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
